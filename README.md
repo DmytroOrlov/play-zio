@@ -5,7 +5,7 @@ This project shows ZIO integration in a playframework application.
 ## Run the project 
 
 ``` 
-sbt ~run 
+sbt ~run
 ```
 
 ## Apis 
@@ -13,13 +13,13 @@ sbt ~run
 ### List users
 
 ``` 
-curl -XGET http://localhost:9000/users
+curl localhost:9000/users | jq
 ```
 
 ### Create a user 
 
 ``` 
-curl -XPOST http://localhost:9000/users -H 'Content-Type: application/json' -d '
+curl localhost:9000/users -H 'Content-Type: application/json' -d '
     {
         "email": "ragnar.lodbrock@gmail.com", 
         "name": "Ragnar Lodbrock",
@@ -30,7 +30,7 @@ curl -XPOST http://localhost:9000/users -H 'Content-Type: application/json' -d '
 #### Validation error : 
 
 ``` 
-curl -XPOST http://localhost:9000/users -H 'Content-Type: application/json' -d '
+curl http://localhost:9000/users -H 'Content-Type: application/json' -d '
     {
         "email": "ragnar.lodbrock@gmail.com", 
         "name": "Ragnar Lodbrock",
@@ -60,7 +60,7 @@ curl -XDELETE http://localhost:9000/users/ragnar.lodbrock@gmail.com --include
 ### get a user 
 
 ``` 
-curl -XGET http://localhost:9000/users/ragnar.lodbrock@gmail.com
+curl http://localhost:9000/users/ragnar.lodbrock@gmail.com
 ```
 
 

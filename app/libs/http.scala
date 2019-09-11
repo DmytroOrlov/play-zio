@@ -1,12 +1,12 @@
 package libs
 
 import play.api.mvc.{Action, ActionBuilder, BodyParser, Result}
-import zio.{DefaultRuntime, IO, UIO}
+import zio.{IO, Runtime, UIO}
 
 object http {
 
   //TODO use ZIO environment if need to do more complex dependency injection
-  val runtime = new DefaultRuntime {}
+  val runtime = Runtime.default
 
   implicit class ActionBuilderOps[+R[_], B](actionBuilder: ActionBuilder[R, B]) {
 
@@ -25,8 +25,8 @@ object http {
     private def ioToTask[E, A](io: IO[E, A]) =
       io.mapError {
         case t: Throwable => t
-        case s: String    => new Throwable(s)
-        case e            => new Throwable("Error: " + e.toString)
+        case s: String    => new RuntimeException(s)
+        case e            => new RuntimeException("Error: " + e.toString)
       }
   }
 
